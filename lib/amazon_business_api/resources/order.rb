@@ -2,6 +2,7 @@
 
 require_relative 'shipment'
 require_relative 'charge'
+require_relative 'line_item'
 
 module AmazonBusinessApi
   class Order < AmazonBusinessApi::Resource

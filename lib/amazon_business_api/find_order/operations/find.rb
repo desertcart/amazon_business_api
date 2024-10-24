@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module AmazonBusinessApi
-  class Order
+  class FindOrder
     module Operations
       class Find < AmazonBusinessApi::Operation::Find
         class Contract < LedgerSync::Ledgers::Contract
@@ -11,11 +11,6 @@ module AmazonBusinessApi
         end
 
         private
-
-        def hash_to_deserialize
-          orders = response.body['orders'] || []
-          orders.first
-        end
 
         def url
           "/reports/2021-01-08/orders/#{resource.order_id}?includeLineItems=true&includeShipments=true&includeCharges=true"
