@@ -18,6 +18,7 @@ module AmazonBusinessApi
       attribute :product_description, hash_attribute: :productDescription
       attribute :upc_values, hash_attribute: :upcValues
       attribute :ean_values, hash_attribute: :eanValues
+      attribute :is_bundled_asin, hash_attribute: :isBundledAsin
     end
   end
 end

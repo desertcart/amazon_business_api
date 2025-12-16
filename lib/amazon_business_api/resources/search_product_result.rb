@@ -28,5 +28,6 @@ module AmazonBusinessApi
     attribute :product_description, type: LedgerSync::Type::String
     attribute :upc_values, type: Type::Array
     attribute :ean_values, type: Type::Array
+    attribute :is_bundled_asin, type: LedgerSync::Type::Boolean
   end
 end

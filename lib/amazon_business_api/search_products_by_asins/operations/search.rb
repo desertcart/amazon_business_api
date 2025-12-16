@@ -13,7 +13,7 @@ module AmazonBusinessApi
         private
 
         def url
-          '/products/2020-08-26/products/getProductsByAsins'
+          '/products/2020-08-26/products/getProductsByAsins?inclusionsForProducts=isBundledAsin'
         end
 
         def opts
