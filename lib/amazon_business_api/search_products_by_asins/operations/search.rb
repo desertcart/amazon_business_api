@@ -13,7 +13,8 @@ module AmazonBusinessApi
         private
 
         def url
-          '/products/2020-08-26/products/getProductsByAsins?inclusionsForProducts=isBundledAsin'
+          # Request all product data + facets for OFFERS and IMAGES + isBundledAsin inclusion
+          '/products/2020-08-26/products/getProductsByAsins?facets=OFFERS&facets=IMAGES&inclusionsForProducts=isBundledAsin'
         end
 
         def opts
