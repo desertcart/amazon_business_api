@@ -13,19 +13,19 @@ module AmazonBusinessApi
         private
 
         def url
-          # Request all product data + facets for OFFERS and IMAGES + isBundledAsin inclusion
-          '/products/2020-08-26/products/getProductsByAsins?facets=OFFERS&facets=IMAGES&inclusionsForProducts=isBundledAsin'
+          # Request product data + facets for OFFERS/IMAGES + extra product inclusions
+          facets = 'OFFERS,IMAGES'
+          inclusions = 'isBundledAsin,title,productDescription,features'
+          "/products/2020-08-26/products/getProductsByAsins?facets=#{facets}&inclusionsForProducts=#{inclusions}"
         end
 
         def opts
-          {
-            body: serializer.serialize(resource:).merge(
-              'productRegion' => client.region[:product_region],
-              'locale' => 'en_US'
-            )
-          }
+          body = serializer.serialize(resource:).merge(
+            'productRegion' => client.region[:product_region],
+            'locale' => 'en_US'
+          )
+          { body: }
         end
-
       end
     end
   end
