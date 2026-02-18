@@ -23,6 +23,11 @@ module AmazonBusinessApi
         endpoint: 'https://eu.business-api.amazon.com',
         product_region: 'UK',
         aws_region: 'eu-west-1'
+      },
+      in: {
+        endpoint: 'https://eu.business-api.amazon.com',
+        product_region: 'IN',
+        aws_region: 'eu-west-1'
       }
     }.freeze
 
