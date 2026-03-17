@@ -6,6 +6,7 @@ require_relative 'delivery_information'
 module AmazonBusinessApi
   class Shipment < AmazonBusinessApi::Resource
     # https://developer-docs.amazon.com/amazon-business/docs/reporting-api-v1-reference-1
+    attribute :shipment_id, type: LedgerSync::Type::String
     attribute :shipment_date, type: LedgerSync::Type::String
     attribute :shipment_status, type: LedgerSync::Type::String # maybe SHIPPED
     attribute :carrier_tracking, type: LedgerSync::Type::String

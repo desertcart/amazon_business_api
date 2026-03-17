@@ -6,6 +6,7 @@ require_relative '../money/deserializer'
 module AmazonBusinessApi
   class Shipment
     class Deserializer < AmazonBusinessApi::Deserializer
+      attribute :shipment_id, hash_attribute: :shipmentId
       attribute :shipment_date, hash_attribute: :shipmentDate
       attribute :shipment_status, hash_attribute: :shipmentStatus
       attribute :carrier_tracking, hash_attribute: :carrierTracking
