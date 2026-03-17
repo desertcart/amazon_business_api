@@ -28,7 +28,7 @@ module AmazonBusinessApi
         end
 
         def hash_to_deserialize
-          response.body['packageTrackingDetails']
+          response.body['packageTrackingDetails'] || {}
         end
       end
     end
