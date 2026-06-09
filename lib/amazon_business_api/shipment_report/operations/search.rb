@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'cgi'
+require 'date'
 
 module AmazonBusinessApi
   class ShipmentReport
@@ -10,6 +11,9 @@ module AmazonBusinessApi
       # range. orderStartDate/orderEndDate are required; the end date cannot be
       # in the future and the range cannot exceed 366 days.
       class Search < AmazonBusinessApi::Operation::Search
+        # Amazon rejects ranges wider than this (and future end dates).
+        MAX_RANGE_DAYS = 366
+
         # Resource attribute => query parameter name.
         QUERY_PARAMS = {
           order_start_date: 'orderStartDate',
@@ -28,6 +32,41 @@ module AmazonBusinessApi
             optional(:region).maybe(:string)
             optional(:shipment_statuses).maybe(:string)
             optional(:next_page_token).maybe(:string)
+          end
+
+          # Reject invalid date formats client-side before hitting the API.
+          rule(:order_start_date) do
+            key.failure('must be a valid date') if parse_date(value).nil?
+          end
+
+          # End date must parse and cannot be in the future.
+          rule(:order_end_date) do
+            parsed = parse_date(value)
+            if parsed.nil?
+              key.failure('must be a valid date')
+            elsif parsed > Date.today
+              key.failure('cannot be in the future')
+            end
+          end
+
+          # Inclusive range cannot exceed 366 days.
+          rule(:order_start_date, :order_end_date) do
+            start_date = parse_date(values[:order_start_date])
+            end_date = parse_date(values[:order_end_date])
+            next unless start_date && end_date
+
+            inclusive_days = (end_date - start_date).to_i + 1
+            if inclusive_days > MAX_RANGE_DAYS
+              key(:order_end_date).failure("range cannot exceed #{MAX_RANGE_DAYS} days")
+            end
+          end
+
+          private
+
+          def parse_date(value)
+            Date.parse(value.to_s)
+          rescue ArgumentError, TypeError
+            nil
           end
         end
 
