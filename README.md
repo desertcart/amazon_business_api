@@ -26,8 +26,8 @@ client = AmazonBusinessApi::Client.new(
 )
 ```
 
-Supported regions are `us`, `uk`, `es`, and `in`. Spain uses the European API endpoint with
-`ES` as its product region.
+Supported regions are `us`, `uk`, `de`, `fr`, `it`, `es`, and `in`. European marketplaces use
+the European API endpoint with their own product region.
 
 During development of this gem you may opt to use these directly from your `.env` file using our helper method:
 ```ruby

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require_relative '../spec_helper'
 
 RSpec.describe AmazonBusinessApi::Client do
-  describe 'Spain region' do
+  describe 'European marketplace regions' do
     subject(:client) do
       described_class.new(
-        region: :es,
+        region:,
         client_id: 'client-id',
         client_secret: 'client-secret',
         email: 'admin@example.com',
@@ -16,12 +16,18 @@ RSpec.describe AmazonBusinessApi::Client do
       )
     end
 
-    it 'uses the European endpoint and ES product region' do
-      expect(client.region).to eq(
-        endpoint: 'https://eu.business-api.amazon.com',
-        product_region: 'ES',
-        aws_region: 'eu-west-1'
-      )
+    %i[uk de fr it es].each do |marketplace|
+      context "with the #{marketplace.to_s.upcase} marketplace" do
+        let(:region) { marketplace }
+
+        it 'uses the European endpoint and marketplace product region' do
+          expect(client.region).to eq(
+            endpoint: 'https://eu.business-api.amazon.com',
+            product_region: marketplace.to_s.upcase,
+            aws_region: 'eu-west-1'
+          )
+        end
+      end
     end
   end
 end

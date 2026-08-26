@@ -1,4 +1,5 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'amazon_business_api'
+require 'ledger_sync'
+require_relative '../lib/amazon_business_api/client'
