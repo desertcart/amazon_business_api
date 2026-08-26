@@ -24,6 +24,11 @@ module AmazonBusinessApi
         product_region: 'UK',
         aws_region: 'eu-west-1'
       },
+      es: {
+        endpoint: 'https://eu.business-api.amazon.com',
+        product_region: 'ES',
+        aws_region: 'eu-west-1'
+      },
       in: {
         endpoint: 'https://eu.business-api.amazon.com',
         product_region: 'IN',
